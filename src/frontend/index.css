@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   HAPP DENTAL CLINIC — Design System
+   Fonts: Bricolage Grotesque (headlines), Figtree (body)
+   Palette: Soft Teal, Deep Aqua, Warm Peach, Ivory
+   ===================================================== */
+
+/* Display font — Bricolage Grotesque */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-VF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body font — Figtree */
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree-VF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Plus Jakarta Sans */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-VF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Core Palette — HAPP Dental */
+    /* Soft Teal #5FD3C6 → oklch(0.8 0.108 187) */
+    /* Deep Aqua #1C6E7D → oklch(0.47 0.09 202) */
+    /* Warm Peach #FFB7A5 → oklch(0.83 0.1 40) */
+    /* Soft Ivory #FAFAF8 → oklch(0.986 0.003 85) */
+
+    --teal: 0.8 0.108 187;
+    --teal-deep: 0.47 0.09 202;
+    --teal-darker: 0.38 0.085 202;
+    --peach: 0.83 0.1 40;
+    --peach-deep: 0.72 0.12 40;
+    --ivory: 0.986 0.003 85;
+
+    /* Semantic tokens */
+    --background: 0.986 0.003 85;
+    --foreground: 0.22 0.045 220;
+    --card: 1 0 0;
+    --card-foreground: 0.25 0.04 220;
+    --popover: 1 0 0;
+    --popover-foreground: 0.22 0.045 220;
+    --primary: 0.8 0.108 187;
+    --primary-foreground: 0.2 0.04 205;
+    --secondary: 0.47 0.09 202;
+    --secondary-foreground: 0.98 0 0;
+    --muted: 0.94 0.015 190;
+    --muted-foreground: 0.52 0.05 202;
+    --accent: 0.83 0.1 40;
+    --accent-foreground: 0.25 0.06 30;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.88 0.035 190;
+    --input: 0.91 0.02 190;
+    --ring: 0.8 0.108 187;
+
+    /* Charts */
+    --chart-1: 0.8 0.108 187;
+    --chart-2: 0.47 0.09 202;
+    --chart-3: 0.83 0.1 40;
+    --chart-4: 0.72 0.12 40;
+    --chart-5: 0.6 0.13 187;
+
+    /* Sidebar */
+    --sidebar: 0.97 0.01 190;
+    --sidebar-foreground: 0.22 0.045 220;
+    --sidebar-primary: 0.8 0.108 187;
+    --sidebar-primary-foreground: 0.2 0.04 205;
+    --sidebar-accent: 0.94 0.02 190;
+    --sidebar-accent-foreground: 0.25 0.04 220;
+    --sidebar-border: 0.88 0.035 190;
+    --sidebar-ring: 0.8 0.108 187;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Figtree", "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", "Plus Jakarta Sans", sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  /* Teal gradient (brand hero gradient) */
+  .gradient-teal {
+    background: linear-gradient(135deg, oklch(0.8 0.108 187) 0%, oklch(0.47 0.09 202) 100%);
+  }
+
+  /* Hero gradient — deep, luminous, multi-stop */
+  .gradient-teal-hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 20%, oklch(0.68 0.14 185 / 0.55) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 75% 70%, oklch(0.42 0.1 200 / 0.45) 0%, transparent 65%),
+      linear-gradient(160deg, oklch(0.52 0.12 190) 0%, oklch(0.35 0.09 204) 50%, oklch(0.26 0.07 212) 100%);
+  }
+
+  /* Hero noise texture overlay — adds tactile depth */
+  .hero-noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Glow card shadows */
+  .shadow-teal-glow {
+    box-shadow:
+      0 4px 24px -4px oklch(0.8 0.108 187 / 0.35),
+      0 2px 8px -2px oklch(0.47 0.09 202 / 0.2);
+  }
+
+  .shadow-teal-glow-lg {
+    box-shadow:
+      0 12px 48px -8px oklch(0.7 0.12 187 / 0.45),
+      0 4px 16px -4px oklch(0.47 0.09 202 / 0.3),
+      0 0 0 1px oklch(0.8 0.108 187 / 0.12);
+  }
+
+  /* Soft card */
+  .card-soft {
+    background: white;
+    border: 1px solid oklch(0.88 0.035 190);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 2px 8px -2px oklch(0.8 0.108 187 / 0.12),
+      0 1px 3px -1px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Why-card hover — lift + teal left accent */
+  .card-why {
+    background: white;
+    border: 1px solid oklch(0.9 0.025 190);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 2px 8px -2px oklch(0.8 0.108 187 / 0.1),
+      0 1px 3px -1px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-why::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, oklch(0.8 0.108 187), oklch(0.47 0.09 202));
+    border-radius: 1.25rem 0 0 1.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-why:hover {
+    box-shadow:
+      0 16px 48px -8px oklch(0.7 0.12 187 / 0.4),
+      0 4px 16px -4px oklch(0.47 0.09 202 / 0.25),
+      0 0 0 1px oklch(0.8 0.108 187 / 0.18);
+    transform: translateY(-4px);
+    border-color: oklch(0.84 0.06 190);
+  }
+
+  .card-why:hover::before {
+    opacity: 1;
+  }
+
+  /* Teal glow border for images */
+  .border-teal-glow {
+    border: 3px solid oklch(0.8 0.108 187 / 0.5);
+    box-shadow:
+      0 0 0 6px oklch(0.8 0.108 187 / 0.1),
+      0 0 0 12px oklch(0.8 0.108 187 / 0.05),
+      0 16px 48px -8px oklch(0.47 0.09 202 / 0.45);
+  }
+
+  /* Peach banner */
+  .bg-peach-soft {
+    background: oklch(0.95 0.04 40);
+  }
+
+  /* Section ivory */
+  .bg-ivory {
+    background: oklch(0.986 0.003 85);
+  }
+
+  /* Text teal */
+  .text-teal {
+    color: oklch(0.47 0.09 202);
+  }
+
+  .text-teal-light {
+    color: oklch(0.72 0.1 187);
+  }
+
+  /* Gradient text */
+  .text-gradient-teal {
+    background: linear-gradient(135deg, oklch(0.7 0.13 184), oklch(0.44 0.1 202));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* WhatsApp green */
+  .bg-whatsapp {
+    background: #25d366;
+  }
+
+  /* Testimonial card glass */
+  .card-testimonial {
+    background: white;
+    border: 1px solid oklch(0.9 0.025 190);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 4px 32px -4px oklch(0.8 0.108 187 / 0.18),
+      0 1px 6px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-testimonial::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, oklch(0.8 0.108 187), oklch(0.47 0.09 202), oklch(0.83 0.1 40));
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+}
